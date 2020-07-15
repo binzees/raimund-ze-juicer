@@ -62,7 +62,7 @@ module spiralSimple(height=20,Radius=20,baseRadius=3,frequency=1,resolution=25)
                     translate ([Radius,0,(i+1)*height/(resolution-1)]) 
                     sphere( r=baseRadius );
                 }
-		   }
-		}
-	}
+            }
+        }
+    }
 }
