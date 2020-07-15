@@ -20,10 +20,10 @@ module schnecke(
     union()
     {
         stomp( 
-            h, 
-            5,
-            21,
-            10 );
+            h=h, 
+            stompHeight=5,
+            r1=21,
+            r2=10 );
         
         difference()
         {
@@ -45,15 +45,15 @@ module schnecke(
  * A cylinder stomp.  Creates a cylinder and limits this to
  * stompHeight.
  */
-module stomp( fullHeight, stompHeight, r1, r2 )
+module stomp( h, stompHeight, r1, r2 )
 {
     d = max( r1, r2 ) * 2;
     
     difference()
     {
-        cylinder( r1=r1, r2=r2, h=fullHeight );
+        cylinder( r1=r1, r2=r2, h=h );
         
-        translate( [0,0,(fullHeight/2)+stompHeight] )
-            cube( [d,d,fullHeight], center = true  );
+        translate( [0,0,(h/2)+stompHeight] )
+            cube( [d,d,h], center = true  );
     }
 }
