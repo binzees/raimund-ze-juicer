@@ -1,3 +1,9 @@
+/*
+ * https://www.stlfinder.com/model/openscad-spiral-module-library/2403714/
+ *
+ * Modified by micbinz.
+ */
+
 //spiralSolidMultiEllipse(
 //    height=40,
 //    Radius=20,
@@ -6,27 +12,42 @@
 //    resolution=25,
 //    numPairs=3);
 
-spiralSimple(
+spiralCone(
     height=20,
     Radius=20,
-    baseRadius=10,
+    baseRadius=5,
     frequency=1,
     resolution=50
 );
 
 //-------------------------------------------------------------
 //simple spiral
-module spiralSimple(height=20,Radius=20,baseRadius=3,frequency=1,resolution=25) {
-	union(){
-		translate ([0,0,-(height/2)]) {
-				for(i=[0:resolution-2]){
-					hull(){
-						rotate ([0,0,frequency*360/(resolution-1)*i]) translate ([Radius,0,i*height/(resolution-1)]) sphere(r=baseRadius, center=true);
-						rotate ([0,0,frequency*360/(resolution-1)*(i+1)]) translate ([Radius,0,(i+1)*height/(resolution-1)]) sphere(r=baseRadius,center=true);
-					}
-				}
-		}
-	}
+module spiralSimple(
+    height=20,
+    Radius=20,
+    baseRadius=3,
+    frequency=1,
+    resolution=25)
+{
+	union()
+    {
+		translate ([0,0,-(height/2)])
+        {
+            for(i=[0:resolution-2])
+            {
+                hull()
+                {
+                    rotate ([0,0,frequency*360/(resolution-1)*i])
+                    translate ([Radius,0,i*height/(resolution-1)]) 
+                    sphere(r=baseRadius);
+                    
+                    rotate ([0,0,frequency*360/(resolution-1)*(i+1)])
+                    translate ([Radius,0,(i+1)*height/(resolution-1)])
+                    sphere(r=baseRadius);
+                }
+            }
+        }
+    }
 }
 
 //cone spiral
