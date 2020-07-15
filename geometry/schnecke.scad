@@ -1,14 +1,17 @@
 
- schnecke();
+difference()
+{
+schnecke();
 
+translate( [0,0,140/2])
 spiralSimple(
     height=140,
-    Radius=20,
-    baseRadius=10,
-    frequency=2,
-    resolution=50
+    Radius=30,
+    baseRadius=20,
+    frequency=4,
+    resolution=100
 );
-
+}
 
 
 module schnecke ()
@@ -36,14 +39,22 @@ module schnecke ()
 //-------------------------------------------------------------
 //simple spiral
 module spiralSimple(height=20,Radius=20,baseRadius=3,frequency=1,resolution=25) {
-	union(){
-		translate ([0,0,-(height/2)]) {
-				for(i=[0:resolution-2]){
-					hull(){
-						rotate ([0,0,frequency*360/(resolution-1)*i]) translate ([Radius,0,i*height/(resolution-1)]) sphere(r=baseRadius, center=true);
-						rotate ([0,0,frequency*360/(resolution-1)*(i+1)]) translate ([Radius,0,(i+1)*height/(resolution-1)]) sphere(r=baseRadius,center=true);
-					}
-				}
+	union()
+    {
+		translate( [0,0,-(height/2)] )
+        {
+            for( i=[0:resolution-2])
+            {
+                hull()
+                {
+                    rotate ([0,0,frequency*360/(resolution-1)*i]) 
+                    translate ([Radius,0,i*height/(resolution-1)])
+                    sphere( r=baseRadius );
+                    rotate ([0,0,frequency*360/(resolution-1)*(i+1)])
+                    translate ([Radius,0,(i+1)*height/(resolution-1)]) 
+                    sphere( r=baseRadius );
+                }
+		   }
 		}
 	}
 }
