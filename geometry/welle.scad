@@ -1,3 +1,14 @@
+//
+// raimund-the-juicer
+//
+// welle top-level part
+//
+// Copyright (c) 2020 Michael Binz
+//
+
+use <schnecke.scad>
+
+welle();
 
 module welle ()
 {
@@ -17,7 +28,7 @@ module welle ()
     h_c4 = 15;
     r_c4 = 17 / 2;
 
-    cylinder( r1=r1_c1, r2=r2_c1, h=h_c1 );
+    schnecke( r1=r1_c1, r2=r2_c1, h=h_c1 );
 
     translate( [0, 0, h_c1-OVERLAP] )
     {
@@ -57,5 +68,3 @@ module welle ()
         }
     }
 }
-
-welle();
