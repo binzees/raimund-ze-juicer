@@ -39,7 +39,7 @@
 // metric_thread (diameter=8, pitch=1, length=4);
 
 // Square thread.
- metric_thread (diameter=8, pitch=1, length=4, square=true);
+// metric_thread (diameter=8, pitch=1, length=4, square=true);
 
 // Non-standard: long pitch, same thread size.
 //metric_thread (diameter=8, pitch=4, length=4, thread_size=1, groove=true);
