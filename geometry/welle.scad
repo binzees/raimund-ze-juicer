@@ -7,6 +7,7 @@
 //
 
 use <schnecke.scad>
+use <lib/threads.scad>
 
 welle();
 
@@ -42,6 +43,7 @@ module welle ()
             
             cylinder( r=r_c3, h=c3 );
 
+            // Kurbelbefestigung.
             translate( [0,0,c3-OVERLAP] )
             {
                 c4 = h_c4 + OVERLAP;
@@ -63,6 +65,13 @@ module welle ()
                             center = false
                         );
                     }
+                    
+                    // TODO(micbinz) check measures.
+                    metric_thread(
+                        diameter=8,
+                        pitch=1,
+                        length=c4+1,
+                        internal=true );
                 }
             }
         }
