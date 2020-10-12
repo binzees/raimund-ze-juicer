@@ -8,7 +8,7 @@
 
 use <schnecke.scad>
 use <lib/threads.scad>
-use <common.scad>
+include <common.scad>
 
 drilling();
 
@@ -19,20 +19,21 @@ module drilling()
     
     union ()
     {
-        
-    cylinder(
-        h=diameter, 
-        d1=2*diameter,
-        d2=0,
-        center=true);
-    
-    translate( [0, 0, depth/2] )
-    {
-        cylinder(
-            h=depth, 
-            d=diameter,
-            center=true);
-    }
-    
+        translate( [0, 0, (diameter/2) - cmn_OVERLAP ] )
+        {
+            cylinder(
+                h=diameter, 
+                d1=2*diameter,
+                d2=0,
+                center=true);
+            
+            translate( [0, 0, depth/2] )
+            {
+                cylinder(
+                    h=depth, 
+                    d=diameter,
+                    center=true);
+            }
+        }
     } // union
 }
