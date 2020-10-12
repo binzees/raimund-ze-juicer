@@ -1,29 +1,28 @@
 //
 // raimund-the-juicer
 //
-// welle top-level part
-//
 // Copyright (c) 2020 Michael Binz
 //
 
-use <schnecke.scad>
-use <lib/threads.scad>
 include <common.scad>
 
 drilling();
 
-module drilling()
+// A drilling. Subtract.
+module drilling(
+    d = 6,
+    depth = 50
+)
 {
-    diameter = 6;
-    depth = 50;
+    d = d + (2*cmn_OVERLAP);
     
     union ()
     {
-        translate( [0, 0, (diameter/2) - cmn_OVERLAP ] )
+        translate( [0, 0, (d/2) - cmn_OVERLAP ] )
         {
             cylinder(
-                h=diameter, 
-                d1=2*diameter,
+                h=d, 
+                d1=2*d,
                 d2=0,
                 center=true);
             
@@ -31,7 +30,7 @@ module drilling()
             {
                 cylinder(
                     h=depth, 
-                    d=diameter,
+                    d=d,
                     center=true);
             }
         }
