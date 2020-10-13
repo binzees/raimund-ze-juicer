@@ -1,50 +1,63 @@
 //
 // raimund-the-juicer
 //
-// welle top-level part
+// platte common part
 //
 // Copyright (c) 2020 Michael Binz
 //
 
-use <schnecke.scad>
-use <lib/threads.scad>
+use <drilling.scad>
 
 platte();
 
-module platte()
+/*
+ * @param l=60 Length in x direction.
+ * @param w=40 Width in y direction.
+ * @param s=2 Thickness in z direction.
+ * @param drilling=6 Drilling diameter.
+ */
+module platte(
+    l=60,
+    w=40,
+    s=2,
+    drilling=6
+)
 {
-    cornerRadius = 10;
-    length = 50;
-    width = 80;
-    height = 2;
-
-    OVERLAP = 0.001;
-
-    d_top = 80;
-    d_bottom = 40;
-    // Height
-    h0 = 300;
-    // Angle
-    angle=22.5;
-    thickness = 2;
+    cornerRadius = 5;
+    length = l;
+    width = w;
+    height = s;
     
+    circleDiameter = 2*cornerRadius;
+    h = height /2;
 
-    cube([d_top+20,d_top+20,thickness], center=true);
-     
-    rotate ([angle,0,0]) {
-    translate( [0, 0, 0] )
-    {
-        
-        difference () {
-            cylinder( 
-                r1=d_top/2,
-                r2=d_bottom/2,
-                h=h0 );
-            cylinder( 
-                r1=(d_top/2)-(2*thickness),
-                r2=(d_bottom/2)-(2*thickness),
-                h=h0 );
+    difference() {
+        hull() 
+        {
+            tlLen = (length/2) - cornerRadius;
+            tlWid = (width/2) - cornerRadius;
+            
+            translate([tlLen,tlWid,h]) 
+                cylinder(d=circleDiameter, h=height, center=true);
+            translate([tlLen,-tlWid,h]) 
+                cylinder(d=circleDiameter, h=height, center=true);
+            translate([-tlLen,tlWid,h]) 
+                cylinder(d=circleDiameter, h=height, center=true);
+            translate([-tlLen,-tlWid,h]) 
+                cylinder(d=circleDiameter, h=height, center=true);
         }
-    }
+        union() {
+            tlLen = (length/2) - circleDiameter;
+            tlWid = (width/2) - circleDiameter;
+            
+            translate([tlLen,tlWid,-height]) 
+                drilling( d=drilling, depth=h );
+            translate([tlLen,-tlWid,-height]) 
+                drilling( d=drilling, depth=h );
+            translate([-tlLen,tlWid,-height]) 
+                drilling( d=drilling, depth=h );
+            translate([-tlLen,-tlWid,-height])
+                drilling( d=drilling, depth=h );
+        }    
     }
 }
